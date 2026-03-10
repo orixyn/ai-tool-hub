@@ -49,18 +49,18 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
 
   return (
     <div
-      className={`rounded-lg border border-neutral-200 p-4 transition-opacity dark:border-neutral-800 ${
-        isDone ? "opacity-60" : ""
-      } ${isPending ? "pointer-events-none opacity-50" : ""}`}
+      className={`corner-marks rounded-lg border border-border bg-surface p-4 transition-all duration-200 ${
+        isDone ? "opacity-50" : ""
+      } ${isPending ? "pointer-events-none opacity-30" : ""}`}
     >
       <div className="mb-2 flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <button
             onClick={handleToggleDone}
-            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition-colors ${
+            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition-all duration-200 active:scale-90 ${
               isDone
-                ? "border-green-500 bg-green-500 text-white"
-                : "border-neutral-300 hover:border-neutral-500 dark:border-neutral-600"
+                ? "border-accent bg-accent text-background"
+                : "border-border hover:border-accent/50"
             }`}
           >
             {isDone && <Check size={12} />}
@@ -68,15 +68,15 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
           <div>
             <Link
               href={`/tools/${bookmark.tool_slug}`}
-              className={`font-medium transition-colors hover:text-neutral-600 dark:hover:text-neutral-300 ${
+              className={`text-[14px] font-medium transition-colors duration-200 hover:text-accent ${
                 isDone ? "line-through" : ""
               }`}
             >
               {bookmark.tool_name}
             </Link>
             {bookmark.due_date && (
-              <div className="mt-1 flex items-center gap-1 text-xs text-neutral-500">
-                <Calendar size={12} />
+              <div className="mt-1 flex items-center gap-1 font-mono text-[11px] text-muted">
+                <Calendar size={11} />
                 {new Date(bookmark.due_date).toLocaleDateString("ja-JP")}
               </div>
             )}
@@ -84,10 +84,10 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
         </div>
         <button
           onClick={handleRemove}
-          className="shrink-0 text-neutral-400 transition-colors hover:text-red-500"
+          className="shrink-0 text-border transition-colors duration-200 hover:text-red-400 active:scale-90"
           aria-label="削除"
         >
-          <Trash2 size={16} />
+          <Trash2 size={15} />
         </button>
       </div>
 
@@ -97,13 +97,13 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
             rows={2}
-            className="w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm outline-none focus:border-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:focus:border-neutral-500"
+            className="w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-[13px] outline-none transition-all duration-200 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.08)]"
             placeholder="メモを入力..."
           />
           <div className="mt-2 flex gap-2">
             <button
               onClick={handleSaveMemo}
-              className="rounded-lg bg-neutral-900 px-3 py-1 text-xs text-white transition-colors hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
+              className="btn-slide rounded-md border border-accent/40 px-3 py-1 text-[12px] font-medium text-accent transition-colors duration-200 hover:text-background active:scale-95"
             >
               保存
             </button>
@@ -112,7 +112,7 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
                 setMemo(bookmark.memo ?? "");
                 setIsEditing(false);
               }}
-              className="rounded-lg px-3 py-1 text-xs text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+              className="rounded-md px-3 py-1 text-[12px] text-muted transition-colors duration-200 hover:text-foreground"
             >
               キャンセル
             </button>
@@ -123,16 +123,16 @@ export function BookmarkItem({ bookmark }: { bookmark: BookmarkWithTool }) {
           {memo ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="text-left text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+              className="text-left text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
             >
               {memo}
             </button>
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="text-sm text-neutral-400 transition-colors hover:text-neutral-600 dark:hover:text-neutral-300"
+              className="font-mono text-[12px] text-border transition-colors duration-200 hover:text-muted"
             >
-              メモを追加...
+              + メモを追加
             </button>
           )}
         </div>

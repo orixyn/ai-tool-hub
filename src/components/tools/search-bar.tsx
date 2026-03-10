@@ -32,7 +32,7 @@ export function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="ツールを検索..."
-        className="w-full rounded-md border border-border bg-surface py-2 pl-9 pr-4 text-[13px] outline-none transition-colors duration-200 placeholder:text-muted/60 focus:border-accent/40"
+        className="w-full rounded-md border border-border bg-surface py-2 pl-9 pr-4 font-mono text-[13px] outline-none transition-all duration-200 placeholder:text-muted/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.08)]"
       />
     </form>
   );

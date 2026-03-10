@@ -38,15 +38,15 @@ export function FavoriteButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-[13px] transition-all duration-200 hover:border-accent/30 disabled:opacity-50"
+      className={`flex items-center gap-2 rounded-md border px-4 py-2.5 text-[13px] transition-all duration-200 active:scale-95 disabled:opacity-50 ${
+        isFavorited
+          ? "border-red-500/30 bg-red-500/10 text-red-400"
+          : "border-border text-muted hover:border-accent/30 hover:text-accent"
+      }`}
     >
       <Heart
         size={16}
-        className={
-          isFavorited
-            ? "fill-red-500 text-red-500"
-            : "text-muted"
-        }
+        className={isFavorited ? "fill-red-500 text-red-500" : ""}
       />
       {isFavorited ? "お気に入り済み" : "お気に入り"}
     </button>

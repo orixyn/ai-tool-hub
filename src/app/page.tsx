@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import * as icons from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ToolGrid } from "@/components/tools/tool-grid";
@@ -24,45 +24,62 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.08),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(96,165,250,0.06),transparent_60%)]" />
-        <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-28">
-          <p className="mb-4 text-[13px] font-medium tracking-widest text-accent uppercase">
-            AI Tool Discovery
-          </p>
-          <h1 className="mb-6 max-w-2xl text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl">
-            最適なAIツールを
+      <section className="scan-line relative overflow-hidden">
+        {/* Grid background */}
+        <div className="hud-grid pointer-events-none absolute inset-0" />
+        {/* Radial glow */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(6,182,212,0.1),transparent_60%)]" />
+
+        <div className="relative mx-auto max-w-5xl px-6 pb-28 pt-32">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-border bg-surface/60 px-3 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+            <span className="font-mono text-[11px] tracking-widest text-accent uppercase">
+              AI Tool Discovery Platform
+            </span>
+          </div>
+
+          <h1 className="mb-6 max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+            最適な
+            <span className="text-accent">AIツール</span>
+            を
             <br />
             見つけよう
           </h1>
-          <p className="mb-10 max-w-lg text-[15px] leading-relaxed text-muted">
+          <p className="mb-12 max-w-lg text-[15px] leading-relaxed text-muted">
             画像生成、コーディング、ライティングなど、目的に合ったAIツールを検索・比較・管理できます。
           </p>
           <div className="flex items-center gap-4">
             <Link
               href="/tools"
-              className="inline-flex items-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-[13px] font-medium text-background transition-opacity duration-200 hover:opacity-80"
+              className="cta-glow btn-slide group inline-flex items-center gap-2 rounded-md border border-accent bg-accent/10 px-6 py-3 text-[13px] font-medium text-accent transition-colors duration-300 hover:text-background active:scale-95"
             >
               ツールを探す
-              <ArrowRight size={14} />
+              <ArrowRight
+                size={14}
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </Link>
             <Link
-              href="/tools"
-              className="text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
+              href="#categories"
+              className="group flex items-center gap-1 text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
             >
               カテゴリ一覧
+              <ChevronRight
+                size={14}
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Tools */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <div className="mb-10 flex items-end justify-between">
+      <section className="border-t border-border/60">
+        <div className="mx-auto max-w-5xl px-6 py-24">
+          <div className="mb-12 flex items-end justify-between">
             <div>
-              <p className="mb-1 text-[12px] font-medium tracking-widest text-muted uppercase">
-                Featured
+              <p className="mb-2 font-mono text-[11px] tracking-widest text-accent uppercase">
+                // Featured
               </p>
               <h2 className="text-2xl font-bold tracking-tight">
                 注目のツール
@@ -70,10 +87,13 @@ export default async function HomePage() {
             </div>
             <Link
               href="/tools"
-              className="flex items-center gap-1.5 text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
+              className="group flex items-center gap-1.5 text-[13px] text-muted transition-colors duration-200 hover:text-accent"
             >
               すべて見る
-              <ArrowRight size={13} />
+              <ArrowRight
+                size={13}
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </Link>
           </div>
           <ToolGrid tools={featuredTools} />
@@ -81,11 +101,11 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <div className="mb-10">
-            <p className="mb-1 text-[12px] font-medium tracking-widest text-muted uppercase">
-              Categories
+      <section id="categories" className="border-t border-border/60">
+        <div className="mx-auto max-w-5xl px-6 py-24">
+          <div className="mb-12">
+            <p className="mb-2 font-mono text-[11px] tracking-widest text-accent uppercase">
+              // Categories
             </p>
             <h2 className="text-2xl font-bold tracking-tight">
               カテゴリから探す
@@ -98,7 +118,7 @@ export default async function HomePage() {
                 <Link
                   key={cat.slug}
                   href={`/tools?category=${cat.slug}`}
-                  className="group flex items-center gap-4 rounded-lg border border-border bg-surface p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+                  className="corner-marks glow-border group flex items-center gap-4 rounded-lg border border-border bg-surface p-5 transition-all duration-300 hover:bg-surface/80 hover:shadow-[0_0_30px_rgba(6,182,212,0.06)] active:scale-[0.98]"
                 >
                   {Icon && (
                     <Icon
@@ -107,6 +127,10 @@ export default async function HomePage() {
                     />
                   )}
                   <span className="text-[14px] font-medium">{cat.name}</span>
+                  <ChevronRight
+                    size={14}
+                    className="ml-auto text-border transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-accent"
+                  />
                 </Link>
               );
             })}

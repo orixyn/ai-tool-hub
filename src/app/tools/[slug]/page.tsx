@@ -13,11 +13,10 @@ type Tool = Database["public"]["Tables"]["tools"]["Row"];
 type Category = Database["public"]["Tables"]["categories"]["Row"];
 
 const pricingColors: Record<string, string> = {
-  free: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
-  freemium: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400",
-  paid: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400",
-  enterprise:
-    "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-400",
+  free: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
+  freemium: "border-cyan-500/30 text-cyan-400 bg-cyan-500/10",
+  paid: "border-amber-500/30 text-amber-400 bg-amber-500/10",
+  enterprise: "border-violet-500/30 text-violet-400 bg-violet-500/10",
 };
 
 export default async function ToolDetailPage({
@@ -56,33 +55,36 @@ export default async function ToolDetailPage({
       {/* Back link */}
       <Link
         href="/tools"
-        className="mb-10 inline-flex items-center gap-1.5 text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
+        className="group mb-10 inline-flex items-center gap-1.5 text-[13px] text-muted transition-colors duration-200 hover:text-accent"
       >
-        <ArrowLeft size={14} />
+        <ArrowLeft
+          size={14}
+          className="transition-transform duration-200 group-hover:-translate-x-0.5"
+        />
         ツール一覧に戻る
       </Link>
 
       {/* Header */}
       <div className="mb-10">
         <div className="mb-4 flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-surface text-lg font-bold text-muted">
+          <div className="corner-marks flex h-14 w-14 items-center justify-center rounded-lg border border-border bg-surface font-mono text-lg font-bold text-muted">
             {typedTool.name.charAt(0)}
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">
               {typedTool.name}
             </h1>
-            <div className="mt-1 flex items-center gap-3">
+            <div className="mt-1.5 flex items-center gap-3">
               {typedCategory && (
                 <Link
                   href={`/tools?category=${typedCategory.slug}`}
-                  className="text-[13px] text-muted transition-colors duration-200 hover:text-foreground"
+                  className="font-mono text-[12px] text-muted transition-colors duration-200 hover:text-accent"
                 >
                   {typedCategory.name}
                 </Link>
               )}
               <span
-                className={`rounded-md px-2 py-0.5 text-[11px] font-medium ${pricingColors[typedTool.pricing_type] ?? ""}`}
+                className={`rounded-md border px-2 py-0.5 text-[11px] font-medium ${pricingColors[typedTool.pricing_type] ?? ""}`}
               >
                 {PRICING_LABELS[typedTool.pricing_type] ??
                   typedTool.pricing_type}
@@ -103,7 +105,7 @@ export default async function ToolDetailPage({
           href={typedTool.website_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-md bg-foreground px-4 py-2.5 text-[13px] font-medium text-background transition-opacity duration-200 hover:opacity-80"
+          className="btn-slide cta-glow flex items-center gap-2 rounded-md border border-accent bg-accent/10 px-4 py-2.5 text-[13px] font-medium text-accent transition-colors duration-300 hover:text-background active:scale-95"
         >
           <ExternalLink size={14} />
           公式サイトを開く
@@ -112,8 +114,8 @@ export default async function ToolDetailPage({
 
       {/* Description */}
       <section className="mb-10">
-        <h2 className="mb-3 text-[13px] font-medium tracking-widest text-muted uppercase">
-          概要
+        <h2 className="mb-4 font-mono text-[11px] tracking-widest text-accent uppercase">
+          // Overview
         </h2>
         <p className="text-[15px] leading-[1.8] text-foreground/80">
           {typedTool.description}
@@ -122,13 +124,13 @@ export default async function ToolDetailPage({
 
       {/* Pricing */}
       <section className="mb-10">
-        <h2 className="mb-3 text-[13px] font-medium tracking-widest text-muted uppercase">
-          料金
+        <h2 className="mb-4 font-mono text-[11px] tracking-widest text-accent uppercase">
+          // Pricing
         </h2>
-        <div className="rounded-lg border border-border bg-surface p-5">
+        <div className="corner-marks rounded-lg border border-border bg-surface p-5">
           <div className="flex items-center gap-3">
             <span
-              className={`rounded-md px-2 py-0.5 text-[11px] font-medium ${pricingColors[typedTool.pricing_type] ?? ""}`}
+              className={`rounded-md border px-2 py-0.5 text-[11px] font-medium ${pricingColors[typedTool.pricing_type] ?? ""}`}
             >
               {PRICING_LABELS[typedTool.pricing_type] ??
                 typedTool.pricing_type}
@@ -145,14 +147,14 @@ export default async function ToolDetailPage({
       {/* Use Cases */}
       {typedTool.use_cases.length > 0 && (
         <section className="mb-10">
-          <h2 className="mb-3 text-[13px] font-medium tracking-widest text-muted uppercase">
-            用途
+          <h2 className="mb-4 font-mono text-[11px] tracking-widest text-accent uppercase">
+            // Use Cases
           </h2>
           <div className="flex flex-wrap gap-2">
             {typedTool.use_cases.map((uc) => (
               <span
                 key={uc}
-                className="rounded-md border border-border bg-surface px-3 py-1.5 text-[13px]"
+                className="rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-[12px] text-foreground/70"
               >
                 {uc}
               </span>

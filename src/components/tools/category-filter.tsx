@@ -12,10 +12,10 @@ export function CategoryFilter() {
     <div className="flex flex-wrap gap-2">
       <Link
         href="/tools"
-        className={`rounded-md px-3 py-1.5 text-[13px] transition-all duration-200 ${
+        className={`rounded-md px-3 py-1.5 text-[13px] transition-all duration-200 active:scale-95 ${
           !current
-            ? "bg-foreground text-background"
-            : "bg-surface text-muted border border-border hover:text-foreground"
+            ? "border border-accent bg-accent/10 text-accent"
+            : "border border-border text-muted hover:border-accent/30 hover:text-foreground"
         }`}
       >
         すべて
@@ -24,10 +24,10 @@ export function CategoryFilter() {
         <Link
           key={cat.slug}
           href={`/tools?category=${cat.slug}`}
-          className={`rounded-md px-3 py-1.5 text-[13px] transition-all duration-200 ${
+          className={`rounded-md px-3 py-1.5 text-[13px] transition-all duration-200 active:scale-95 ${
             current === cat.slug
-              ? "bg-foreground text-background"
-              : "bg-surface text-muted border border-border hover:text-foreground"
+              ? "border border-accent bg-accent/10 text-accent"
+              : "border border-border text-muted hover:border-accent/30 hover:text-foreground"
           }`}
         >
           {cat.name}

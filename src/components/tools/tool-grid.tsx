@@ -6,9 +6,11 @@ type Tool = Database["public"]["Tables"]["tools"]["Row"];
 export function ToolGrid({ tools }: { tools: Tool[] }) {
   if (tools.length === 0) {
     return (
-      <p className="py-16 text-center text-[14px] text-muted">
-        ツールが見つかりませんでした
-      </p>
+      <div className="rounded-lg border border-border bg-surface py-20 text-center">
+        <p className="font-mono text-[13px] text-muted">
+          // No tools found
+        </p>
+      </div>
     );
   }
 

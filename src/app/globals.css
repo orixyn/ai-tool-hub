@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #18181b;
+  --background: #0a0a0f;
+  --foreground: #e4e4e7;
   --muted: #71717a;
-  --border: #e4e4e7;
-  --surface: #ffffff;
-  --accent: #3b82f6;
+  --border: #1e1e2a;
+  --surface: #12121a;
+  --accent: #06b6d4;
+  --accent-secondary: #10b981;
+  --glow: rgba(6, 182, 212, 0.15);
+  --glow-strong: rgba(6, 182, 212, 0.3);
 }
 
 @theme inline {
@@ -16,19 +19,11 @@
   --color-border: var(--border);
   --color-surface: var(--surface);
   --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-glow: var(--glow);
+  --color-glow-strong: var(--glow-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #f4f4f5;
-    --muted: #a1a1aa;
-    --border: #27272a;
-    --surface: #18181b;
-    --accent: #60a5fa;
-  }
 }
 
 body {
@@ -37,7 +32,128 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Smooth transitions for interactive elements */
+/* HUD grid background */
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* HUD dot pattern */
+.hud-dots {
+  background-image: radial-gradient(rgba(6, 182, 212, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Corner marks for cards */
+.corner-marks {
+  position: relative;
+}
+.corner-marks::before,
+.corner-marks::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.corner-marks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid var(--accent);
+  border-left: 1.5px solid var(--accent);
+  opacity: 0;
+}
+.corner-marks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid var(--accent);
+  border-right: 1.5px solid var(--accent);
+  opacity: 0;
+}
+.corner-marks:hover::before,
+.corner-marks:hover::after,
+.group:hover .corner-marks::before,
+.group:hover .corner-marks::after {
+  opacity: 1;
+}
+
+/* Glow border on hover */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 40%, transparent 60%, var(--accent-secondary));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* Button slide effect */
+.btn-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.btn-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  transform: translateX(-101%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+.btn-slide:hover::before {
+  transform: translateX(0);
+}
+
+/* CTA pulse glow */
+.cta-glow {
+  box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.cta-glow:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25), 0 0 60px rgba(6, 182, 212, 0.1);
+}
+.cta-glow:active {
+  transform: scale(0.97);
+}
+
+/* Scan line animation for hero */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+.scan-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.15;
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }

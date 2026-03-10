@@ -29,32 +29,42 @@ export default async function FavoritesPage() {
       .in("id", toolIds);
     tools = (data ?? []) as Tool[];
 
-    // Preserve favorites order
     tools.sort(
       (a, b) => toolIds.indexOf(a.id) - toolIds.indexOf(b.id)
     );
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div className="mx-auto max-w-4xl px-6 py-16">
       <Link
         href="/dashboard"
-        className="mb-6 inline-flex items-center gap-1 text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+        className="group mb-8 inline-flex items-center gap-1.5 text-[13px] text-muted transition-colors duration-200 hover:text-accent"
       >
-        <ArrowLeft size={14} />
+        <ArrowLeft
+          size={14}
+          className="transition-transform duration-200 group-hover:-translate-x-0.5"
+        />
         ダッシュボードに戻る
       </Link>
 
-      <h1 className="mb-8 text-2xl font-bold">お気に入り</h1>
+      <div className="mb-10">
+        <p className="mb-2 font-mono text-[11px] tracking-widest text-accent uppercase">
+          // Favorites
+        </p>
+        <h1 className="text-2xl font-bold tracking-tight">お気に入り</h1>
+      </div>
 
       {tools.length === 0 ? (
-        <div className="rounded-lg border border-neutral-200 p-12 text-center dark:border-neutral-800">
-          <p className="mb-2 text-neutral-500">
+        <div className="rounded-lg border border-border bg-surface p-16 text-center">
+          <p className="mb-3 font-mono text-[13px] text-muted">
+            // Empty
+          </p>
+          <p className="mb-4 text-[14px] text-muted">
             お気に入り登録したツールはまだありません
           </p>
           <Link
             href="/tools"
-            className="text-sm text-neutral-900 underline dark:text-neutral-100"
+            className="btn-slide inline-block rounded-md border border-accent/40 px-4 py-2 text-[13px] font-medium text-accent transition-colors duration-200 hover:text-background active:scale-95"
           >
             ツールを探す
           </Link>

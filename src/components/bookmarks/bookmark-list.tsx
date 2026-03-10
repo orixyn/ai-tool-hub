@@ -22,11 +22,11 @@ export function BookmarkList({
   const done = bookmarks.filter((b) => b.is_done);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {pending.length > 0 && (
         <div>
-          <h2 className="mb-3 text-sm font-medium text-neutral-500">
-            未完了 ({pending.length})
+          <h2 className="mb-4 font-mono text-[11px] tracking-widest text-accent uppercase">
+            // Pending ({pending.length})
           </h2>
           <div className="space-y-3">
             {pending.map((b) => (
@@ -38,8 +38,8 @@ export function BookmarkList({
 
       {done.length > 0 && (
         <div>
-          <h2 className="mb-3 text-sm font-medium text-neutral-500">
-            完了済み ({done.length})
+          <h2 className="mb-4 font-mono text-[11px] tracking-widest text-muted uppercase">
+            // Completed ({done.length})
           </h2>
           <div className="space-y-3">
             {done.map((b) => (
