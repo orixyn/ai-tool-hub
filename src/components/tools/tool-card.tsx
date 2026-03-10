@@ -5,39 +5,39 @@ import type { Database } from "@/lib/supabase/types";
 type Tool = Database["public"]["Tables"]["tools"]["Row"];
 
 const pricingColors: Record<string, string> = {
-  free: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  freemium: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  paid: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-  enterprise: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+  free: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
+  freemium: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400",
+  paid: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400",
+  enterprise: "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-400",
 };
 
 export function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="group flex flex-col rounded-lg border border-neutral-200 p-5 transition-colors duration-200 hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600"
+      className="group flex flex-col rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
     >
-      <div className="mb-3 flex items-start justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 text-sm font-bold text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+      <div className="mb-4 flex items-start justify-between">
+        <div className="flex h-11 w-11 items-center justify-center rounded-md bg-background text-[13px] font-bold text-muted">
           {tool.name.charAt(0)}
         </div>
         <span
-          className={`rounded-md px-2 py-0.5 text-xs font-medium ${pricingColors[tool.pricing_type] ?? ""}`}
+          className={`rounded-md px-2 py-0.5 text-[11px] font-medium ${pricingColors[tool.pricing_type] ?? ""}`}
         >
           {PRICING_LABELS[tool.pricing_type] ?? tool.pricing_type}
         </span>
       </div>
-      <h3 className="mb-1 font-medium group-hover:text-neutral-600 dark:group-hover:text-neutral-300">
+      <h3 className="mb-1.5 text-[15px] font-semibold tracking-tight transition-colors duration-200 group-hover:text-accent">
         {tool.name}
       </h3>
-      <p className="mb-3 line-clamp-2 text-sm text-neutral-500">
+      <p className="mb-4 line-clamp-2 text-[13px] leading-relaxed text-muted">
         {tool.description}
       </p>
       <div className="mt-auto flex flex-wrap gap-1.5">
         {tool.use_cases.slice(0, 2).map((uc) => (
           <span
             key={uc}
-            className="rounded-md bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
+            className="rounded-md bg-background px-2 py-0.5 text-[11px] text-muted"
           >
             {uc}
           </span>

@@ -43,10 +43,10 @@ export default async function ToolsPage({
   const tools = (data ?? []) as Tool[];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="mb-8 text-2xl font-bold">ツール一覧</h1>
+    <div className="mx-auto max-w-5xl px-6 py-16">
+      <h1 className="mb-10 text-2xl font-bold tracking-tight">ツール一覧</h1>
 
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Suspense>
           <CategoryFilter />
         </Suspense>
@@ -58,7 +58,7 @@ export default async function ToolsPage({
       </div>
 
       {q && (
-        <p className="mb-6 text-sm text-neutral-500">
+        <p className="mb-8 text-[13px] text-muted">
           「{q}」の検索結果: {tools.length}件
         </p>
       )}

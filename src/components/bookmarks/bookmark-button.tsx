@@ -38,14 +38,14 @@ export function BookmarkButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="flex items-center gap-2 rounded-lg border border-neutral-200 px-4 py-2.5 text-sm transition-colors duration-200 hover:border-neutral-400 disabled:opacity-50 dark:border-neutral-800 dark:hover:border-neutral-600"
+      className="flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-[13px] transition-all duration-200 hover:border-accent/30 disabled:opacity-50"
     >
       <Bookmark
-        size={18}
+        size={16}
         className={
           isBookmarked
             ? "fill-blue-500 text-blue-500"
-            : "text-neutral-500"
+            : "text-muted"
         }
       />
       {isBookmarked ? "ブックマーク済み" : "ブックマーク"}

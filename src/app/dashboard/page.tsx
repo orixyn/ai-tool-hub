@@ -3,18 +3,23 @@ import { Heart, Bookmark } from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="mb-8 text-2xl font-bold">ダッシュボード</h1>
+    <div className="mx-auto max-w-3xl px-6 py-16">
+      <h1 className="mb-10 text-2xl font-bold tracking-tight">
+        ダッシュボード
+      </h1>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/dashboard/favorites"
-          className="flex items-center gap-4 rounded-lg border border-neutral-200 p-6 transition-colors hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600"
+          className="group flex items-center gap-5 rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
         >
-          <Heart size={24} className="text-neutral-500" />
+          <Heart
+            size={22}
+            className="text-muted transition-colors duration-200 group-hover:text-accent"
+          />
           <div>
-            <p className="font-medium">お気に入り</p>
-            <p className="text-sm text-neutral-500">
+            <p className="text-[15px] font-medium">お気に入り</p>
+            <p className="mt-0.5 text-[13px] text-muted">
               お気に入り登録したツール
             </p>
           </div>
@@ -22,12 +27,15 @@ export default function DashboardPage() {
 
         <Link
           href="/dashboard/bookmarks"
-          className="flex items-center gap-4 rounded-lg border border-neutral-200 p-6 transition-colors hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600"
+          className="group flex items-center gap-5 rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
         >
-          <Bookmark size={24} className="text-neutral-500" />
+          <Bookmark
+            size={22}
+            className="text-muted transition-colors duration-200 group-hover:text-accent"
+          />
           <div>
-            <p className="font-medium">ブックマーク & ToDo</p>
-            <p className="text-sm text-neutral-500">
+            <p className="text-[15px] font-medium">ブックマーク & ToDo</p>
+            <p className="mt-0.5 text-[13px] text-muted">
               ブックマークとメモの管理
             </p>
           </div>
