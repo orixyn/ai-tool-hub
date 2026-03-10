@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/kinoshitamasaya/Projects/**)",
+      "Bash(npx create-next-app@latest ai-tool-hub-temp --app --typescript --tailwind --eslint --src-dir --use-npm --import-alias \"@/*\" --turbopack)",
+      "Bash(cd /Users/kinoshitamasaya/Projects/ai-tool-hub && npm run build 2>&1)",
+      "Bash(gh auth:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
